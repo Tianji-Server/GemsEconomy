@@ -18,15 +18,16 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class AccountManager {
 
     private GemsEconomy plugin;
-    private List<Account> accounts;
+    private CopyOnWriteArrayList<Account> accounts;
 
     public AccountManager(GemsEconomy plugin) {
         this.plugin = plugin;
-        this.accounts = new ArrayList<>();
+        this.accounts = new CopyOnWriteArrayList<>();
     }
 
     public void createAccount(String nickname) {

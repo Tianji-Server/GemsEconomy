@@ -20,18 +20,19 @@ import org.bukkit.Bukkit;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Account {
 
     private final UUID uuid;
     private String nickname;
-    private Map<Currency, Double> balances;
+    private ConcurrentHashMap<Currency, Double> balances;
     private boolean canReceiveCurrency = true;
 
     public Account(UUID uuid, String nickname) {
         this.uuid = uuid;
         this.nickname = nickname;
-        this.balances = new HashMap<>();
+        this.balances = new ConcurrentHashMap<>();
     }
 
     public boolean withdraw(Currency currency, double amount) {
