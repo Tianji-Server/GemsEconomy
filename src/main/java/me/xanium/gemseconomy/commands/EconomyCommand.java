@@ -13,9 +13,11 @@ import me.xanium.gemseconomy.account.Account;
 import me.xanium.gemseconomy.currency.Currency;
 import me.xanium.gemseconomy.file.F;
 import me.xanium.gemseconomy.utils.UtilServer;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class EconomyCommand implements CommandExecutor {
 
@@ -45,6 +47,12 @@ public class EconomyCommand implements CommandExecutor {
                 return true;
             }
             changeBalance(sender, args, true);
+        } else if (args[0].equalsIgnoreCase("giveAll")) {
+            if (!sender.hasPermission("gemseconomy.command.giveall")) {
+                sender.sendMessage(F.getNoPerms());
+                return true;
+            }
+            giveAllOnlineBalances(sender, args);
         } else if (args[0].equalsIgnoreCase("set")) {
             if (!sender.hasPermission("gemseconomy.command.set")) {
                 sender.sendMessage(F.getNoPerms());
@@ -52,7 +60,7 @@ public class EconomyCommand implements CommandExecutor {
             }
             set(sender, args);
         } else if (args[0].equalsIgnoreCase("cache")) {
-            for(Account a : plugin.getAccountManager().getAccounts()){
+            for (Account a : plugin.getAccountManager().getAccounts()) {
                 UtilServer.consoleLog("Account: " + a.getNickname() + " cached");
             }
         } else {
@@ -166,7 +174,68 @@ public class EconomyCommand implements CommandExecutor {
         });
     }
 
-    private void set(CommandSender sender, String[] args){
+    private void giveAllOnlineBalances(CommandSender sender, String[] args) {
+        plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
+            if (args.length < 2) {
+                sender.sendMessage(F.getGiveAllUsage());
+                return;
+            }
+            Currency currency = plugin.getCurrencyManager().getDefaultCurrency();
+            if (args.length == 3) {
+                currency = plugin.getCurrencyManager().getCurrency(args[2]);
+            }
+            if (currency != null) {
+                double amount;
+                if (currency.isDecimalSupported()) {
+                    try {
+                        amount = Double.parseDouble(args[1]);
+                        if (amount <= 0.0) {
+                            throw new NumberFormatException();
+                        }
+                    } catch (NumberFormatException ex) {
+                        sender.sendMessage(F.getUnvalidAmount());
+                        return;
+                    }
+                } else {
+                    try {
+                        amount = Integer.parseInt(args[1]);
+                        if (amount <= 0.0) {
+                            throw new NumberFormatException();
+                        }
+                    } catch (NumberFormatException ex) {
+                        sender.sendMessage(F.getUnvalidAmount());
+                        return;
+                    }
+                }
+
+                int succeed = 0;
+                int failed = 0;
+                for (Player player : Bukkit.getOnlinePlayers()) {
+                    Account target = plugin.getAccountManager().getAccount(player);
+                    if (target == null) {
+                        failed++;
+                        continue;
+                    }
+                    if (target.deposit(currency, amount)) {
+                        succeed++;
+                    } else {
+                        failed++;
+                    }
+                }
+
+                sender.sendMessage(F.getAddToAllMessage()
+                        .replace("{success}", Integer.toString(succeed))
+                        .replace("{failed}", Integer.toString(failed))
+                        .replace("{currencycolor}", currency.getColor() + "")
+                        .replace("{amount}", currency.format(amount)));
+
+            } else {
+                sender.sendMessage(F.getUnknownCurrency());
+            }
+        });
+    }
+
+    private void set(CommandSender sender, String[] args) {
         plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
             if (args.length < 3) {
                 sender.sendMessage(F.getSetUsage());

@@ -81,6 +81,7 @@ public class Configuration {
         config.addDefault(path + "add", "&7You gave &a{player}&7: {currencycolor}{amount}. ");
         config.addDefault(path + "take", "&7You took {currencycolor}{amount} &7from &a{player}&7.");
         config.addDefault(path + "set", "&7You set &a{player}&7's balance to {currencycolor}{amount}&7.");
+        config.addDefault(path + "add_all", "&7Successfully give to &a{success} players &7: {currencycolor}{amount}&7, with &c{failed} &7failed.  ");
 
         config.addDefault(path + "exchange_rate_set", "&7Set the exchange rate for {currencycolor}{currency} &7to &a{amount}&7.");
         config.addDefault(path + "exchange_success_custom_other", "&7Successfully exchanged {currencycolor}({currEx}) &7for {currencycolor2}{receivedCurr}&7 to player {player}&7.");
@@ -118,6 +119,7 @@ public class Configuration {
 
         config.addDefault(path + "usage.pay_command", "&2&l>> &a/pay <user> <amount> [currency] &8- &7Pay the specified user the specified amount.");
         config.addDefault(path + "usage.give_command", "&2&l>> &a/eco give <user> <amount> [currency] &8- &7Give a player an amount of a currency.");
+        config.addDefault(path + "usage.giveall_command", "&2&l>> &a/eco giveAll <amount> [currency] &8- &7Give all online players an amount of a currency.");
         config.addDefault(path + "usage.take_command", "&2&l>> &a/eco take <user> <amount> [currency] &8- &7Take an amount of a currency from a player.");
         config.addDefault(path + "usage.set_command", "&2&l>> &a/eco set <user> <amount> [currency] &8- &7Set a players amount of a currency.");
 
