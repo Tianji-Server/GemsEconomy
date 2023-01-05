@@ -14,7 +14,7 @@
 
     <groupId>me.xanium</groupId>
     <artifactId>GemsEconomy</artifactId>
-    <version>4.9.3-GCRemake-1.6</version>
+    <version>4.9.3-GCRemake-1.7</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -91,7 +91,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.19.2-R0.1-SNAPSHOT</version>
+            <version>1.19.3-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
