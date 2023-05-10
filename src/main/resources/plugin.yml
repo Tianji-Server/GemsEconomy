@@ -30,10 +30,6 @@ commands:
     description: Pays another account
     usage: /pay <account> <amount> (currency)
     aliases: [gpay, gemspay]
-  cheque:
-    usage: /cheque
-    description: Write or Redeem a cheque.
-    aliases: [note, banknote]
   exchange:
     usage: /exchange
     description: Exchange currencies.

@@ -132,25 +132,7 @@ public class F {
     public static String getUnvalidPage() {
         return getPrefix() + colorize(cfg.getString("Messages.invalidpage"));
     }
-
-    public static void getChequeHelp(CommandSender sender) {
-        for (String s : cfg.getStringList("Messages.help.cheque_command")) {
-            sender.sendMessage(colorize(s.replace("{prefix}", getPrefix())));
-        }
-    }
-
-    public static String getChequeSucess() {
-        return getPrefix() + colorize(cfg.getString("Messages.cheque.success"));
-    }
-
-    public static String getChequeRedeemed() {
-        return getPrefix() + colorize(cfg.getString("Messages.cheque.redeemed"));
-    }
-
-    public static String getChequeInvalid() {
-        return getPrefix() + colorize(cfg.getString("Messages.cheque.invalid"));
-    }
-
+    
     public static String getGiveUsage() {
         return colorize(cfg.getString("Messages.usage.give_command"));
     }

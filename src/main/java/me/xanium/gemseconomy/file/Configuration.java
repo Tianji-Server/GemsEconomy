@@ -53,12 +53,6 @@ public class Configuration {
 
       //  config.addDefault("sqlite.file", "database.sqlite");
 
-        config.addDefault("cheque.material", Material.PAPER.toString());
-        config.addDefault("cheque.name", "&aBank Note");
-        config.addDefault("cheque.lore", Arrays.asList("&7Worth: {value}.", "&7&oWritten by {player}"));
-        config.addDefault("cheque.console_name", "Console");
-        config.addDefault("cheque.enabled", true);
-
         config.addDefault(path + "prefix", "&2&lGemsEconomy> ");
         config.addDefault(path + "nopermission", "&7You don't have permission to do this.");
         config.addDefault(path + "noconsole", "&7Console cannot do this.");
@@ -101,9 +95,6 @@ public class Configuration {
         config.addDefault(path + "balance_top.next", "{currencycolor}/gbaltop {currencyplural} {page} &7for more.");
         config.addDefault(path + "balance_top.nosupport", "&a{storage} &7doesn't support /baltop.");
 
-        config.addDefault(path + "cheque.success", "&7Cheque successfully written.");
-        config.addDefault(path + "cheque.redeemed", "&7Cheque has been cashed in.");
-        config.addDefault(path + "cheque.invalid", "&7This is not a valid cheque.");
 
         config.addDefault(path + "help.eco_command", Arrays.asList(
                 "{prefix}&e&lEconomy Help",
@@ -122,10 +113,6 @@ public class Configuration {
         config.addDefault(path + "usage.giveall_command", "&2&l>> &a/eco giveAll <amount> [currency] &8- &7Give all online players an amount of a currency.");
         config.addDefault(path + "usage.take_command", "&2&l>> &a/eco take <user> <amount> [currency] &8- &7Take an amount of a currency from a player.");
         config.addDefault(path + "usage.set_command", "&2&l>> &a/eco set <user> <amount> [currency] &8- &7Set a players amount of a currency.");
-
-        config.addDefault(path + "help.cheque_command", Arrays.asList("{prefix}&e&lCheque Help",
-                "&2&l>> &a/cheque write <amount> [currency] &8- &7Write a cheque with a specified amount and currency.",
-                "&2&l>> &a/cheque redeem &8- &7Redeem the cheque."));
 
         config.addDefault(path + "help.currency_command", Arrays.asList("{prefix}&e&lCurrency Help",
                 "&2&l>> &a/currency create <singular> <plural> &8- &7Create a currency.",

@@ -10,7 +10,6 @@ package me.xanium.gemseconomy;
 
 import me.xanium.gemseconomy.account.AccountManager;
 import me.xanium.gemseconomy.bungee.UpdateForwarder;
-import me.xanium.gemseconomy.cheque.ChequeManager;
 import me.xanium.gemseconomy.commands.*;
 import me.xanium.gemseconomy.currency.CurrencyManager;
 import me.xanium.gemseconomy.data.DataStorage;
@@ -35,7 +34,6 @@ public class GemsEconomy extends JavaPlugin {
 
     private DataStorage dataStorage = null;
     private AccountManager accountManager;
-    private ChequeManager chequeManager;
     private CurrencyManager currencyManager;
     private VaultHandler vaultHandler;
     private Metrics metrics;
@@ -45,7 +43,6 @@ public class GemsEconomy extends JavaPlugin {
     private boolean debug = false;
     private boolean vault = false;
     private boolean logging = false;
-    private boolean cheques = true;
 
     private boolean disabling = false;
 
@@ -84,7 +81,6 @@ public class GemsEconomy extends JavaPlugin {
         setDebug(getConfig().getBoolean("debug"));
         setVault(getConfig().getBoolean("vault"));
         setLogging(getConfig().getBoolean("transaction_log"));
-        setCheques(getConfig().getBoolean("cheque.enabled"));
     }
 
     @Override
@@ -104,7 +100,6 @@ public class GemsEconomy extends JavaPlugin {
         getCommand("economy").setExecutor(new EconomyCommand());
         getCommand("pay").setExecutor(new PayCommand());
         getCommand("currency").setExecutor(new CurrencyCommand());
-        getCommand("cheque").setExecutor(new ChequeCommand());
         getCommand("exchange").setExecutor(new ExchangeCommand());
 
         if (isVault()) {
@@ -119,10 +114,6 @@ public class GemsEconomy extends JavaPlugin {
 
         if (isLogging()) {
             getEconomyLogger().save();
-        }
-
-        if(isChequesEnabled()){
-            chequeManager = new ChequeManager(this);
         }
 
         SchedulerUtils.runAsync(this::checkForUpdate);
@@ -219,10 +210,6 @@ public class GemsEconomy extends JavaPlugin {
         return metrics;
     }
 
-    public ChequeManager getChequeManager() {
-        return chequeManager;
-    }
-
     public UpdateForwarder getUpdateForwarder() {
         return updateForwarder;
     }
@@ -254,13 +241,5 @@ public class GemsEconomy extends JavaPlugin {
 
     public boolean isDisabling() {
         return disabling;
-    }
-
-    public boolean isChequesEnabled() {
-        return cheques;
-    }
-
-    public void setCheques(boolean cheques) {
-        this.cheques = cheques;
     }
 }
