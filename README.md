@@ -1,12 +1,7 @@
-# GemsEconomy
-This is my public spigot plugin GemsEconomy.
-If you are looking for the source for the expansion.
-Go here: https://github.com/Xanium1/GemsEconomy-Expansion
+# GemsEconomy  
+This fork has added new commands:  
+feature:/eco giveall [currency] [ amount] 
+Remove cheque feature  
 
-Spigot link: https://www.spigotmc.org/resources/gemseconomy.19655/
-
-
-This version has added new commands:  
-feature:/eco giveall [currency] [amuont]  
-
+Fixed:
 Fix ConcurrentModificationException in 1.19.2  
